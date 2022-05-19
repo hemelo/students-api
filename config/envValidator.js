@@ -1,6 +1,6 @@
 import chalk from 'chalk'
 
-const envRequiredKeys = ['APP_KEY', 'PORT']
+const envRequiredKeys = ['APP_KEY', 'PORT', 'REDIS_CONNECTION']
 
 Array.prototype.missingKeys = array => {
   const missingKeys = []

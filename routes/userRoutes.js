@@ -8,6 +8,7 @@ const router = Router()
 router
   .post('/register', UserController.create, [forbiddenSignup])
   .post('/login', UserController.login)
+  .get('/logout', UserController.logout, [authenticate])
   .get('/user/:id', UserController.show, [authenticate])
   .delete('/user/:id', UserController.destroy, [authenticate])
   .put('/user/:id', UserController.update, [authenticate])

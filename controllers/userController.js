@@ -1,5 +1,6 @@
 import { UsersRepository } from '../repositories'
 import jwt from 'jsonwebtoken'
+import blacklist from '../redis/blacklist.js'
 
 const repository = new UsersRepository()
 
@@ -18,8 +19,17 @@ export default class UserController {
     const userData = req.body
     try {
       const user = await repository.authenticate(userData)
-      const token = jwt.sign({ id: user.id }, process.env.APP_KEY, { expiresIn: 86400 })
+      const token = jwt.sign({ id: user.id }, process.env.APP_KEY, { expiresIn: 43200 })
       return res.status(200).json({ user, token })
+    } catch (error) {
+      return res.status(500).json(error.message)
+    }
+  }
+
+  static async logout (req, res) {
+    try {
+      await blacklist.add(req.headers['x-access-token'])
+      return res.status(204).send()
     } catch (error) {
       return res.status(500).json(error.message)
     }
