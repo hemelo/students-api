@@ -1,7 +1,5 @@
 'use strict'
 
-import module from 'module'
-
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.createTable('Classes', {
