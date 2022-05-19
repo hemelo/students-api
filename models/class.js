@@ -1,6 +1,13 @@
 'use strict'
 
 import { Model } from 'sequelize'
+import { PeopleRepository } from '../repositories'
+
+async function validateInstructor (id) {
+  const peopleRepository = new PeopleRepository()
+  const person = await peopleRepository.getOne({ id })
+  return person.role !== 'instructor'
+}
 
 module.exports = (sequelize, DataTypes) => {
   class Class extends Model {
@@ -23,7 +30,20 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     paranoid: true,
-    modelName: 'Class'
+    modelName: 'Class',
+    hooks: {
+      beforeCreate: async (classs) => {
+        if (validateInstructor(classs.instructor_id)) {
+          throw new Error('Instructor Id is invalid')
+        }
+      },
+      beforeUpdate: async (classs) => {
+        if (validateInstructor(classs.instructor_id)) {
+          throw new Error('Instructor Id is invalid')
+        }
+      }
+    }
   })
+
   return Class
 }
