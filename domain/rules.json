@@ -4,7 +4,6 @@
 	},
 	"roles" : [
 		"instructor",
-		"student",
-		"principal"
+		"student"
 	]
 }
