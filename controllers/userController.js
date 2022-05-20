@@ -54,6 +54,18 @@ export default class UserController {
     }
   }
 
+  static async refreshVerifyLink (req, res) {
+    try {
+      const user = await repository.getOne({ id: req.userId })
+      const signature = await signatureGenerate(req.userId, signaturesConfig.email_verification)
+      const verificationUrl = signedUrlPath(`${hostUrl(req)}/${VALIDATE_EMAIL_ROUTE}/${req.userId}`, signature)
+      new UserVerificationEmail(user, verificationUrl).sendMail().catch(console.error)
+      return res.status(200).json({ message: `A email with the new link has send to ${user.email}` })
+    } catch (error) {
+      return res.status(500).json(error.message)
+    }
+  }
+
   static async refresh (req, res) {
     try {
       const accessToken = await accessTokenGenerator({ id: req.userId })
@@ -84,7 +96,7 @@ export default class UserController {
         new UserVerificationEmail(newUser, verificationUrl).sendMail().catch(console.error)
       }
 
-      return res.status(200).json(newUser)
+      return res.status(200).json({ newUser, message: `A email with the email validation has send to ${newUser.email}. You can login without validate, but cannot do all actions` })
     } catch (error) {
       return res.status(500).json(error.message)
     }

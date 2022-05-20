@@ -13,6 +13,9 @@ const rules = {
     },
     token_refresh: {
       route: 'token-refresh'
+    },
+    refresh_email_link: {
+      route: 'email-link-refresh'
     }
   }
 }

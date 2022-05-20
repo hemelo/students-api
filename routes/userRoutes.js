@@ -5,6 +5,7 @@ import authorization from '../middleware/authorization.js'
 import rules from '../domain/rules.js'
 
 const VALIDATE_EMAIL_ROUTE = rules.user.email_verification.route
+const REFRESH_EMAIL_ROUTE = rules.user.refresh_email_link.route
 const TOKEN_REFRESH_ROUTE = rules.user.token_refresh.route
 
 const router = Router()
@@ -19,5 +20,6 @@ router
   .post('/user/:id/recover', UserController.recover, [authenticate.access, authorization.verified])
   .post(`/${TOKEN_REFRESH_ROUTE}`, UserController.refresh, [authenticate.refresh])
   .get(`/${VALIDATE_EMAIL_ROUTE}/:id`, UserController.verify, [authorization.signed])
+  .post(`/${REFRESH_EMAIL_ROUTE}`, UserController.refreshVerifyLink, [authenticate.access])
 
 export default router
