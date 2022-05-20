@@ -2,8 +2,8 @@
 import jwt from 'jsonwebtoken'
 import moment from 'moment'
 import crypto from 'crypto'
-import allowlist from '../redis/allowlist.js'
-import blocklist from '../redis/blocklist.js'
+import allowlist from '../redis/allowlistRefreshToken.js'
+import blocklist from '../redis/blocklistAcessToken.js'
 import tokensConfig from '../config/tokens.js'
 
 const accessExpirationTime = tokensConfig.access.expiration.time + tokensConfig.access.expiration.unit
