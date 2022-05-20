@@ -19,8 +19,8 @@ export default {
   },
 
   async has (key) {
-    const resultado = await existsAsync(key)
-    return resultado === 1
+    const result = await existsAsync(key)
+    return result === 1
   },
 
   async delete (key) {
