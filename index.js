@@ -1,7 +1,7 @@
 import express from 'express'
 import routes from './routes'
 import cors from './middleware/cors.js'
-import envValidator from './config/envValidator.js'
+import envValidator from './services/envValidator.js'
 import 'dotenv/config'
 
 /* Env Validator */
