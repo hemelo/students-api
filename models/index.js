@@ -4,19 +4,15 @@ import fs from 'fs'
 import path from 'path'
 import { Sequelize } from 'sequelize'
 import { createRequire } from 'module'
+import databaseConfig from '../config/database.js'
 
 const require = createRequire(import.meta.url)
 const env = process.env.NODE_ENV || 'development'
-const config = require(path.join(__dirname, '..', 'config', 'config.json'))[env]
+const config = databaseConfig[env]
 const basename = path.basename(__filename)
 const database = {}
 
-let sequelize
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config)
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config)
-}
+const sequelize = new Sequelize(process.env[config.use_env_variable], config)
 
 fs
   .readdirSync(__dirname)
