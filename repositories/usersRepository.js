@@ -52,7 +52,21 @@ export class UsersRepository extends Repository {
   }
 
   async updateOne (updatedData, where, transaction = {}) {
+    if (updatedData.email_verification) {
+      delete updatedData.email_verification
+    }
+
     return database[this.model].scope('withPassword')
       .update(updatedData, { where: { ...where } }, transaction)
+  }
+
+  async verifyEmail (id, transaction = {}) {
+    return database[this.model]
+      .update({ email_verification: true }, { where: { id } }, transaction)
+  }
+
+  async checkEmail (id) {
+    const user = await super.getOne({ id, email_verification: true })
+    return user != null
   }
 }

@@ -1,7 +1,14 @@
 import { UsersRepository } from '../repositories'
 import { accessTokenDelete, accessTokenGenerator, refreshTokenGenerator } from '../services/tokenService.js'
+import { UserVerificationEmail } from '../services/emailService.js'
+import rules from '../domain/rules.js'
+import hostUrl from '../domain/hostUrl'
+import { signatureDelete, signatureGenerate, signaturePayload, signaturePayloadValidateAction, signedUrlPath } from '../services/signatureService.js'
+import signaturesConfig from '../config/signatures.js'
 
 const repository = new UsersRepository()
+
+const VALIDATE_EMAIL_ROUTE = rules.user.email_verification.route
 
 export default class UserController {
   static async show (req, res) {
@@ -21,6 +28,27 @@ export default class UserController {
       const accessToken = await accessTokenGenerator({ id: user.id })
       const refreshToken = await refreshTokenGenerator({ id: user.id })
       return res.status(200).json({ accessToken, refreshToken })
+    } catch (error) {
+      return res.status(500).json(error.message)
+    }
+  }
+
+  static async verify (req, res) {
+    const { id } = req.params
+
+    try {
+      const payload = await signaturePayload(req.signature)
+      const checker = signaturePayloadValidateAction(payload, signaturesConfig.email_verification)
+
+      if (!checker || payload.value != id) {
+        return res.status(401).send({
+          message: 'Invalid signature!'
+        })
+      }
+
+      repository.verifyEmail(id)
+      signatureDelete(req.signature)
+      return res.status(200).json({ message: 'User verified with success!' })
     } catch (error) {
       return res.status(500).json(error.message)
     }
@@ -49,6 +77,13 @@ export default class UserController {
     const newUserData = req.body
     try {
       const newUser = await repository.create(newUserData)
+
+      if (rules.user.email_verification.status) {
+        const signature = await signatureGenerate(newUser.id, signaturesConfig.email_verification)
+        const verificationUrl = signedUrlPath(`${hostUrl(req)}/${VALIDATE_EMAIL_ROUTE}/${newUser.id}`, signature)
+        new UserVerificationEmail(newUser, verificationUrl).sendMail().catch(console.error)
+      }
+
       return res.status(200).json(newUser)
     } catch (error) {
       return res.status(500).json(error.message)
