@@ -22,6 +22,11 @@ module.exports = (sequelize, DataTypes) => {
           msg: 'Invalid email'
         }
       }
+    },
+    email_verification: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     }
   }, {
     sequelize,
@@ -34,6 +39,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     hooks: {
       beforeCreate: async (user) => {
+        user.email_verification = false
         if (user.password) {
           const salt = await bcrypt.genSaltSync(10, 'a')
           user.password = bcrypt.hashSync(user.password, salt)
