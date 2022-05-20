@@ -7,9 +7,9 @@ const router = Router()
 router
   .get('/classtype', ClasstypeController.index)
   .get('/classtype/:id', ClasstypeController.show)
-  .post('/classtype', ClasstypeController.create, [authenticate])
-  .put('/classtype/:id', ClasstypeController.update, [authenticate])
-  .delete('/classtype/:id', ClasstypeController.destroy, [authenticate])
-  .post('/people/:id/recover', ClasstypeController.recover, [authenticate])
+  .post('/classtype', ClasstypeController.create, [authenticate.access])
+  .put('/classtype/:id', ClasstypeController.update, [authenticate.access])
+  .delete('/classtype/:id', ClasstypeController.destroy, [authenticate.access])
+  .post('/people/:id/recover', ClasstypeController.recover, [authenticate.access])
 
 export default router

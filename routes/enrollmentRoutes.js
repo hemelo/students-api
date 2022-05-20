@@ -8,9 +8,9 @@ router
   .get('/enrollments', EnrollmentController.index)
   .get('/people/:studentId/enrollments/:enrollmentId', EnrollmentController.show)
   .get('/people/:studentId/enrollments', EnrollmentController.indexStudent)
-  .post('/people/:studentId/enrollments', EnrollmentController.create, [authenticate])
-  .put('/people/:studentId/enrollments/:enrollmentId', EnrollmentController.update, [authenticate])
-  .delete('/people/:studentId/enrollments/:enrollmentId', EnrollmentController.destroy, [authenticate])
-  .post('/people/:studentId/enrollments/:enrollmentId/recover', EnrollmentController.recover, [authenticate])
+  .post('/people/:studentId/enrollments', EnrollmentController.create, [authenticate.access])
+  .put('/people/:studentId/enrollments/:enrollmentId', EnrollmentController.update, [authenticate.access])
+  .delete('/people/:studentId/enrollments/:enrollmentId', EnrollmentController.destroy, [authenticate.access])
+  .post('/people/:studentId/enrollments/:enrollmentId/recover', EnrollmentController.recover, [authenticate.access])
 
 export default router

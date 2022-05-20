@@ -1,17 +1,17 @@
 import { Router } from 'express'
 import UserController from '../controllers/userController.js'
 import authenticate from '../middleware/authenticate.js'
-import forbiddenSignup from '../middleware/forbiddenSignup.js'
 
 const router = Router()
 
 router
-  .post('/register', UserController.create, [forbiddenSignup])
+  .post('/register', UserController.create, [authenticate.logged])
   .post('/login', UserController.login)
-  .get('/logout', UserController.logout, [authenticate])
-  .get('/user/:id', UserController.show, [authenticate])
-  .delete('/user/:id', UserController.destroy, [authenticate])
-  .put('/user/:id', UserController.update, [authenticate])
-  .post('/user/:id/recover', UserController.recover, [authenticate])
+  .post('/logout', UserController.logout, [authenticate.refresh, authenticate.access])
+  .post('/token-refresh', UserController.refresh, [authenticate.refresh])
+  .get('/user/:id', UserController.show, [authenticate.access])
+  .delete('/user/:id', UserController.destroy, [authenticate.access])
+  .put('/user/:id', UserController.update, [authenticate.access])
+  .post('/user/:id/recover', UserController.recover, [authenticate.access])
 
 export default router
