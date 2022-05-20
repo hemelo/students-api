@@ -1,7 +1,7 @@
 'use strict'
 
 import { Model } from 'sequelize'
-import rules from '../domain'
+import rules from '../domain/rules.js'
 
 const roles = rules.roles || []
 

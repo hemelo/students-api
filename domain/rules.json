@@ -1,9 +1,0 @@
-{
-	"class" : {
-		"max_per_classroom": 20
-	},
-	"roles" : [
-		"instructor",
-		"student"
-	]
-}

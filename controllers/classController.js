@@ -1,5 +1,5 @@
 import { ClassesRepository } from '../repositories'
-import rules from '../domain'
+import rules from '../domain/rules.js'
 
 const repository = new ClassesRepository()
 
