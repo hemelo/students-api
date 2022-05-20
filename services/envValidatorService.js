@@ -1,12 +1,15 @@
 import chalk from 'chalk'
 
 const envRequiredKeys = [
+  'APP_NAME',
+  'APP_MAIL',
   'APP_KEY',
   'PORT',
   'REDIS_CONNECTION',
   'TEST_DATABASE',
   'DEVELOPMENT_DATABASE',
-  'PRODUCTION_DATABASE'
+  'PRODUCTION_DATABASE',
+  'MESSAGE_BROKERS'
 ]
 
 Array.prototype.missingKeys = array => {
