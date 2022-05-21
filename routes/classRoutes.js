@@ -11,7 +11,7 @@ router
   .post('/classes', ClassController.create, [authenticate.access, authorization.verified, authorization.hasRole(['principal', 'classManager'])])
   .put('/classes/:id', ClassController.update, [authenticate.access, authorization.verified, authorization.hasRole(['principal', 'classManager'])])
   .delete('/classes/:id', ClassController.destroy, [authenticate.access, authorization.verified, authorization.hasRole(['principal', 'classManager'])])
-  .post('/classes/:id/recover', ClassController.recover, [authenticate.access, authorization.verified, authorization.hasRole(['principal', 'classManager', 'instructor'])])
+  .post('/classes/:id/recover', ClassController.recover, [authenticate.access, authorization.verified, authorization.hasRole(['principal', 'classManager'])])
   .get('/classes/:id/enrollments/cancelled', ClassController.showCancelled, [authenticate.access, authorization.verified, authorization.hasRole(['principal', 'classManager', 'instructor'])])
   .get('/classes/:id/enrollments/confirmed', ClassController.showConfirmed, [authenticate.access, authorization.verified, authorization.hasRole(['principal', 'classManager', 'instructor'])])
   .get('/classes/:id/enrollments', ClassController.showEnrollments, [authenticate.access, authorization.verified, authorization.hasRole(['principal', 'classManager', 'instructor'])])
