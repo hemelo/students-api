@@ -21,6 +21,26 @@ export default class UserController {
     }
   }
 
+  static async profile (req, res) {
+    try {
+      const user = await repository.getOne({ id: Number(req.userId) })
+      return res.status(200).json(user)
+    } catch (error) {
+      return res.status(500).json(error.message)
+    }
+  }
+
+  static async updateProfile (req, res) {
+    const newInfo = req.body
+    try {
+      await repository.updateOne(newInfo, { id: Number(req.userId) })
+      const updatedStudent = await repository.getOne({ id: Number(req.userId) })
+      return res.status(200).json(updatedStudent)
+    } catch (error) {
+      return res.status(500).json(error.message)
+    }
+  }
+
   static async login (req, res) {
     const userData = req.body
     try {
