@@ -1,7 +1,7 @@
-import { PeopleRepository } from '../repositories'
-const repository = new PeopleRepository()
+import { StudentRepository } from '../repositories'
+const repository = new StudentRepository()
 
-export default class PersonController {
+export default class StudentsController {
   static async index (req, res) {
     try {
       const all = await repository.getMany()
@@ -40,10 +40,10 @@ export default class PersonController {
   }
 
   static async create (req, res) {
-    const newPersonData = req.body
+    const newStudentData = req.body
     try {
-      const newPerson = await repository.create(newPersonData)
-      return res.status(200).json(newPerson)
+      const newStudent = await repository.create(newStudentData)
+      return res.status(200).json(newStudent)
     } catch (error) {
       return res.status(500).json(error.message)
     }
@@ -54,8 +54,8 @@ export default class PersonController {
     const newInfo = req.body
     try {
       await repository.updateOne(newInfo, { id: Number(id) })
-      const updatedPerson = await repository.getOne({ id: Number(id) })
-      return res.status(200).json(updatedPerson)
+      const updatedStudent = await repository.getOne({ id: Number(id) })
+      return res.status(200).json(updatedStudent)
     } catch (error) {
       return res.status(500).json(error.message)
     }

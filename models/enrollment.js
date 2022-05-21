@@ -1,18 +1,11 @@
 'use strict'
 
 import { Model } from 'sequelize'
-import { PeopleRepository } from '../repositories'
 
-async function validateStudent (id) {
-  const peopleRepository = new PeopleRepository()
-  const person = await peopleRepository.getOne({ id })
-  return person.role !== 'student'
-}
-
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   class Enrollment extends Model {
     static associate (models) {
-      Enrollment.belongsTo(models.Person, {
+      Enrollment.belongsTo(models.Student, {
         foreignKey: 'student_id'
       })
       Enrollment.belongsTo(models.Class, {
@@ -21,23 +14,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Enrollment.init({
-    status: DataTypes.BOOLEAN
+    status: DataTypes.BOOLEAN,
+    student_id: DataTypes.INTEGER,
+    class_id: DataTypes.INTEGER
   }, {
     sequelize,
     paranoid: true,
     modelName: 'Enrollment',
-    hooks: {
-      beforeCreate: async (enroll) => {
-        if (validateStudent(enroll.student_id)) {
-          throw new Error('Student Id is invalid')
-        }
-      },
-      beforeUpdate: async (enroll) => {
-        if (validateStudent(enroll.student_id)) {
-          throw new Error('Student Id is invalid')
-        }
-      }
-    },
     defaultScope: {
       where: { }
     },

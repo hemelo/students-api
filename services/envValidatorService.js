@@ -14,7 +14,8 @@ const envRequiredKeys = [
   'MAIL_PORT',
   'MAIL_USER',
   'MAIL_PASSWORD',
-  'MAIL_HOST'
+  'MAIL_HOST',
+  'SLACK_TOKEN'
 ]
 
 Array.prototype.missingKeys = array => {

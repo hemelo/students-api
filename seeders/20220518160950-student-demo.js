@@ -2,12 +2,11 @@
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('People', [
+    await queryInterface.bulkInsert('Students', [
       {
         name: 'Ana',
         active: true,
         email: 'ana@gmail.com',
-        role: 'student',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -15,7 +14,6 @@ module.exports = {
         name: 'Mark',
         active: true,
         email: 'mark@gmail.com',
-        role: 'student',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -23,7 +21,6 @@ module.exports = {
         name: 'Felipe',
         active: true,
         email: 'felipe@gmail.com',
-        role: 'student',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -31,7 +28,6 @@ module.exports = {
         name: 'Jackson',
         active: false,
         email: 'jackson@gmail.com',
-        role: 'student',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -39,7 +35,6 @@ module.exports = {
         name: 'John',
         active: true,
         email: 'john@gmail.com',
-        role: 'instructor',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -47,7 +42,6 @@ module.exports = {
         name: 'Paul',
         active: true,
         email: 'paul@gmail.com',
-        role: 'instructor',
         createdAt: new Date(),
         updatedAt: new Date()
       }
@@ -55,6 +49,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('People', null, {})
+    await queryInterface.bulkDelete('Students', null, {})
   }
 }

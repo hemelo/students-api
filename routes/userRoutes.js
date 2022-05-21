@@ -11,15 +11,17 @@ const TOKEN_REFRESH_ROUTE = rules.user.token_refresh.route
 const router = Router()
 
 router
-  .post('/register', UserController.create, [authenticate.logged])
   .post('/login', UserController.login)
-  .post('/logout', UserController.logout, [authenticate.refresh, authenticate.access])
-  .get('/user/:id', UserController.show, [authenticate.access])
-  .delete('/user/:id', UserController.destroy, [authenticate.access, authorization.verified])
-  .put('/user/:id', UserController.update, [authenticate.access, authorization.verified])
-  .post('/user/:id/recover', UserController.recover, [authenticate.access, authorization.verified])
+  .get('/profile', UserController.profile, [authenticate.access])
+  .put('/profile', UserController.updateProfile, [authenticate.access])
+  .post('/register', UserController.create, [authenticate.logged])
   .post(`/${TOKEN_REFRESH_ROUTE}`, UserController.refresh, [authenticate.refresh])
   .get(`/${VALIDATE_EMAIL_ROUTE}/:id`, UserController.verify, [authorization.signed])
+  .post('/logout', UserController.logout, [authenticate.refresh, authenticate.access])
   .post(`/${REFRESH_EMAIL_ROUTE}`, UserController.refreshVerifyLink, [authenticate.access])
+  .get('/user/:id', UserController.show, [authenticate.access, authorization.verified, authorization.hasRole(['principal', 'moderator'])])
+  .delete('/user/:id', UserController.destroy, [authenticate.access, authorization.verified, authorization.hasRole(['principal', 'moderator'])])
+  .put('/user/:id', UserController.update, [authenticate.access, authorization.verified, authorization.hasRole(['principal', 'moderator'])])
+  .post('/user/:id/recover', UserController.recover, [authenticate.access, authorization.verified, authorization.hasRole(['principal', 'moderator'])])
 
 export default router

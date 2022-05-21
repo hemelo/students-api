@@ -7,10 +7,10 @@ const router = Router()
 
 router
   .get('/classtype', ClasstypeController.index)
-  .get('/classtype/:id', ClasstypeController.show)
-  .post('/classtype', ClasstypeController.create, [authenticate.access, authorization.verified])
-  .put('/classtype/:id', ClasstypeController.update, [authenticate.access, authorization.verified])
-  .delete('/classtype/:id', ClasstypeController.destroy, [authenticate.access, authorization.verified])
-  .post('/people/:id/recover', ClasstypeController.recover, [authenticate.access, authorization.verified])
+  .get('/classtype/:id', ClasstypeController.show, [authenticate.access, authorization.hasPermission(['show'])])
+  .post('/classtype', ClasstypeController.create, [authenticate.access, authorization.verified, authorization.hasRole(['principal', 'classManager'])])
+  .put('/classtype/:id', ClasstypeController.update, [authenticate.access, authorization.verified, authorization.hasRole(['principal', 'classManager'])])
+  .delete('/classtype/:id', ClasstypeController.destroy, [authenticate.access, authorization.verified, authorization.hasRole(['principal', 'classManager'])])
+  .post('/people/:id/recover', ClasstypeController.recover, [authenticate.access, authorization.verified, authorization.hasRole(['principal', 'classManager'])])
 
 export default router

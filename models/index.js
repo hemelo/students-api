@@ -3,10 +3,8 @@
 import fs from 'fs'
 import path from 'path'
 import { Sequelize } from 'sequelize'
-import { createRequire } from 'module'
 import databaseConfig from '../config/database.js'
 
-const require = createRequire(import.meta.url)
 const env = process.env.NODE_ENV || 'development'
 const config = databaseConfig[env]
 const basename = path.basename(__filename)
@@ -19,8 +17,8 @@ fs
   .filter(file => {
     return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js')
   })
-  .forEach(file => {
-    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes)
+  .forEach(async file => {
+    const model = (await import(path.join(__dirname, file))).default(m => m(sequelize, Sequelize.DataTypes))
     database[model.name] = model
   })
 

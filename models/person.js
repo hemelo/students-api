@@ -1,25 +1,18 @@
 'use strict'
 
 import { Model } from 'sequelize'
-import rules from '../domain/rules.js'
 
-const roles = rules.roles || []
-
-module.exports = (sequelize, DataTypes) => {
-  class Person extends Model {
+export default (sequelize, DataTypes) => {
+  class Student extends Model {
     static associate (models) {
-      Person.hasMany(models.Class, {
-        foreignKey: 'instructor_id'
-      })
-
-      Person.hasMany(models.Enrollment, {
+      Student.hasMany(models.Enrollment, {
         foreignKey: 'student_id',
         scope: { status: true },
         as: 'studentEnrolls'
       })
     }
   }
-  Person.init({
+  Student.init({
     name: {
       type: DataTypes.STRING,
       validate: {
@@ -40,21 +33,11 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    active: DataTypes.BOOLEAN,
-    role: {
-      type: DataTypes.STRING,
-      validate: {
-        validator: function (data) {
-          if (!roles.includes(data)) {
-            throw new Error('Role should be instructor or student')
-          }
-        }
-      }
-    }
+    active: DataTypes.BOOLEAN
   }, {
     sequelize,
     paranoid: true,
-    modelName: 'Person',
+    modelName: 'Student',
     defaultScope: {
       where: { }
     },
@@ -63,5 +46,5 @@ module.exports = (sequelize, DataTypes) => {
       inactive: { where: { active: false } }
     }
   })
-  return Person
+  return Student
 }

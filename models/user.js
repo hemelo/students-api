@@ -3,13 +3,21 @@
 import { Model } from 'sequelize'
 import bcrypt from 'bcrypt'
 
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   class User extends Model {
     static associate (models) {
+      User.hasMany(models.Class, {
+        foreignKey: 'instructor_id'
+      })
 
+      User.belongsTo(models.Role, {
+        foreignKey: 'role_id',
+        as: 'role'
+      })
     }
   }
   User.init({
+    role_id: DataTypes.INTEGER,
     username: DataTypes.STRING,
     password: DataTypes.STRING,
     email: {

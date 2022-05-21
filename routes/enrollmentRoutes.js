@@ -6,12 +6,12 @@ import authorization from '../middleware/authorization.js'
 const router = Router()
 
 router
-  .get('/enrollments', EnrollmentController.index)
-  .get('/people/:studentId/enrollments/:enrollmentId', EnrollmentController.show)
-  .get('/people/:studentId/enrollments', EnrollmentController.indexStudent)
-  .post('/people/:studentId/enrollments', EnrollmentController.create, [authenticate.access, authorization.verified])
-  .put('/people/:studentId/enrollments/:enrollmentId', EnrollmentController.update, [authenticate.access, authorization.verified])
-  .delete('/people/:studentId/enrollments/:enrollmentId', EnrollmentController.destroy, [authenticate.access, authorization.verified])
-  .post('/people/:studentId/enrollments/:enrollmentId/recover', EnrollmentController.recover, [authenticate.access, authorization.verified])
+  .get('/enrollments', EnrollmentController.index, [authenticate.access, authorization.hasPermission(['show'])])
+  .get('/students/:studentId/enrollments/:enrollmentId', EnrollmentController.show, [authenticate.access, authorization.verified, authorization.hasRole(['principal', 'enrollmentsManager'])])
+  .get('/students/:studentId/enrollments', EnrollmentController.indexStudent, [authenticate.access, authorization.verified, authorization.hasRole(['principal', 'enrollmentsManager', 'instructor'])])
+  .post('/students/:studentId/enrollments', EnrollmentController.create, [authenticate.access, authorization.verified, authorization.hasRole(['principal', 'enrollmentsManager'])])
+  .put('/students/:studentId/enrollments/:enrollmentId', EnrollmentController.update, [authenticate.access, authorization.verified, authorization.hasRole(['principal', 'enrollmentsManager'])])
+  .delete('/students/:studentId/enrollments/:enrollmentId', EnrollmentController.destroy, [authenticate.access, authorization.verified, authorization.hasRole(['principal', 'enrollmentsManager'])])
+  .post('/students/:studentId/enrollments/:enrollmentId/recover', EnrollmentController.recover, [authenticate.access, authorization.verified, authorization.hasRole(['principal', 'enrollmentsManager'])])
 
 export default router

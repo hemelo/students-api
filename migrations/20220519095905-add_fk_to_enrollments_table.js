@@ -5,7 +5,7 @@ module.exports = {
     await queryInterface.addColumn('Enrollments', 'student_id', {
       allowNull: false,
       type: Sequelize.INTEGER,
-      references: { model: 'Person', key: 'id' }
+      references: { model: 'Student', key: 'id' }
     })
 
     await queryInterface.addColumn('Enrollments', 'class_id', {

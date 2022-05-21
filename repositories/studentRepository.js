@@ -1,9 +1,9 @@
 import { Repository, database } from './repository.js'
 import { EnrollmentsRepository } from './enrollmentsRepository.js'
 
-export class PeopleRepository extends Repository {
+export class StudentRepository extends Repository {
   constructor () {
-    super('Person')
+    super('Student')
     this.enrollments = new EnrollmentsRepository()
   }
 
