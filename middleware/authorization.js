@@ -48,18 +48,9 @@ export const hasRole = (roles = []) => async (req, res, next) => {
 }
 
 export const hasPermission = (permissions = []) => async (req, res, next) => {
-  let userRole
-
-  if (!req.userRole) {
-    const userRepository = new UsersRepository()
-    userRole = await userRepository.getUserRole(req.userId)
-  } else {
-    userRole = req.userRole
-  }
-
   const repository = new RolesRepository()
 
-  const hasOrNot = permissions.some(async perm => await repository.checkIfRoleHasPermission(userRole.id, perm))
+  const hasOrNot = permissions.some(async perm => await repository.checkIfRoleHasPermission(req.userId, perm))
 
   if (!hasOrNot) {
     return res.status(403).send({
@@ -67,7 +58,6 @@ export const hasPermission = (permissions = []) => async (req, res, next) => {
     })
   }
 
-  req.userRole = userRole
   next()
 }
 
