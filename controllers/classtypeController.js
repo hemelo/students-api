@@ -1,7 +1,20 @@
 import { ClasstypesRepository } from '../repositories'
+
+/**
+ * @ignore
+ */
 const repository = new ClasstypesRepository()
 
+/**
+ * @desc Contains all logic methods to manage Classtype models through API requests
+ */
 export default class ClasstypeController {
+  /**
+   * @desc Show all class types
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async index (req, res) {
     try {
       const all = await repository.getMany()
@@ -11,6 +24,12 @@ export default class ClasstypeController {
     }
   }
 
+  /**
+   * @desc Show specific classtype
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async show (req, res) {
     const { id } = req.params
     try {
@@ -21,6 +40,12 @@ export default class ClasstypeController {
     }
   }
 
+  /**
+   * @desc Crate a classtype
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async create (req, res) {
     const newTypeData = req.body
     try {
@@ -31,6 +56,12 @@ export default class ClasstypeController {
     }
   }
 
+  /**
+   * @desc Update a classtype
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async update (req, res) {
     const { id } = req.params
     const newInfo = req.body
@@ -42,6 +73,12 @@ export default class ClasstypeController {
     }
   }
 
+  /**
+   * @desc Destroy a classtype
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async destroy (req, res) {
     const { id } = req.params
     try {
@@ -52,6 +89,12 @@ export default class ClasstypeController {
     }
   }
 
+  /**
+   * @desc Recover a classtype
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async recover (req, res) {
     const { id } = req.params
     try {

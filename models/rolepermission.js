@@ -3,6 +3,9 @@
 import { Model } from 'sequelize'
 import { RolepermissionsRepository } from '../repositories'
 
+/**
+ * @ignore
+ */
 export default (sequelize, DataTypes) => {
   class RolePermission extends Model {
     /**

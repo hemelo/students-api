@@ -1,7 +1,20 @@
 import { StudentRepository } from '../repositories'
+
+/**
+ * @ignore
+ */
 const repository = new StudentRepository()
 
+/**
+ * @desc Contains all logic methods to manage Student models through API requests
+ */
 export default class StudentsController {
+  /**
+   * @desc Show all students
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async index (req, res) {
     try {
       const all = await repository.getMany()
@@ -11,6 +24,12 @@ export default class StudentsController {
     }
   }
 
+  /**
+   * @desc Show all active students
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async indexActive (req, res) {
     try {
       const all = await repository.getOnlyActive()
@@ -20,6 +39,12 @@ export default class StudentsController {
     }
   }
 
+  /**
+   * @desc Show all inactive students
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async indexInactive (req, res) {
     try {
       const all = await repository.getOnlyInactive()
@@ -29,6 +54,12 @@ export default class StudentsController {
     }
   }
 
+  /**
+   * @desc Show specific student
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async show (req, res) {
     const { id } = req.params
     try {
@@ -39,6 +70,12 @@ export default class StudentsController {
     }
   }
 
+  /**
+   * @desc Crate a student
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async create (req, res) {
     const newStudentData = req.body
     try {
@@ -49,6 +86,12 @@ export default class StudentsController {
     }
   }
 
+  /**
+   * @desc Update a student
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async update (req, res) {
     const { id } = req.params
     const newInfo = req.body
@@ -61,6 +104,12 @@ export default class StudentsController {
     }
   }
 
+  /**
+   * @desc Destroy a student
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async destroy (req, res) {
     const { id } = req.params
     try {
@@ -71,6 +120,12 @@ export default class StudentsController {
     }
   }
 
+  /**
+   * @desc Recover a student
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async recover (req, res) {
     const { id } = req.params
     try {
@@ -81,6 +136,12 @@ export default class StudentsController {
     }
   }
 
+  /**
+   * @desc Show enrollemnts for a student
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async showEnrollments (req, res) {
     const { studentId } = req.params
     try {
@@ -91,6 +152,12 @@ export default class StudentsController {
     }
   }
 
+  /**
+   * @desc Deactivate student
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async deactivate (req, res) {
     const { studentId } = req.params
     try {
@@ -102,6 +169,12 @@ export default class StudentsController {
     }
   }
 
+  /**
+   * @desc Activate a student
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async reactivate (req, res) {
     const { studentId } = req.params
     try {

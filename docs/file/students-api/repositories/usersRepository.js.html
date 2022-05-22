@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">students-api/repositories/usersRepository.js | students-api</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Just practicing"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="students-api"><meta property="twitter:description" content="Just practicing"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/hemelo/api-with-sequelize-orm"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#config">config</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-corsConfig">corsConfig</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-databaseConfig">databaseConfig</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-envRequiredKeys">envRequiredKeys</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-signaturesConfig">signaturesConfig</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-tokensConfig">tokensConfig</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#controllers">controllers</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/controllers/classController.js~ClassController.html">ClassController</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/controllers/classtypeController.js~ClasstypeController.html">ClasstypeController</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/controllers/enrollmentController.js~EnrollmentController.html">EnrollmentController</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/controllers/studentController.js~StudentsController.html">StudentsController</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/controllers/userController.js~UserController.html">UserController</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#controllers-shared">controllers/shared</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-hostUrl">hostUrl</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#domain">domain</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-rules">rules</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#infrastructure-kafka">infrastructure/kafka</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-kafka">kafka</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#infrastructure-slack">infrastructure/slack</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-slack">slack</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#middleware">middleware</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-access">access</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-logged">logged</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-refresh">refresh</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-hasPermission">hasPermission</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-hasRole">hasRole</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signed">signed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-verified">verified</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-cors">cors</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-sort">sort</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#repositories">repositories</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/repositories/classesRepository.js~ClassesRepository.html">ClassesRepository</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/repositories/classtypesRepository.js~ClasstypesRepository.html">ClasstypesRepository</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/repositories/enrollmentsRepository.js~EnrollmentsRepository.html">EnrollmentsRepository</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/repositories/permissionsRepository.js~PermissionsRepository.html">PermissionsRepository</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/repositories/repository.js~Repository.html">Repository</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/repositories/rolepermissionsRepository.js~RolepermissionsRepository.html">RolepermissionsRepository</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/repositories/rolesRepository.js~RolesRepository.html">RolesRepository</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/repositories/studentRepository.js~StudentRepository.html">StudentRepository</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/repositories/usersRepository.js~UsersRepository.html">UsersRepository</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#routes">routes</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-index">index</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#services">services</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/services/emailService.js~Email.html">Email</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/services/emailService.js~UserVerificationEmail.html">UserVerificationEmail</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-envValidatorService">envValidatorService</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signatureCheckAllowlist">signatureCheckAllowlist</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signatureDelete">signatureDelete</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signatureGenerate">signatureGenerate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signaturePayload">signaturePayload</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signaturePayloadValidateAction">signaturePayloadValidateAction</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signedUrlPath">signedUrlPath</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-accessTokenCheckBlocklist">accessTokenCheckBlocklist</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-accessTokenDelete">accessTokenDelete</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-accessTokenGenerator">accessTokenGenerator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-accessTokenVerifier">accessTokenVerifier</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-refreshTokenDelete">refreshTokenDelete</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-refreshTokenFinder">refreshTokenFinder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-refreshTokenGenerator">refreshTokenGenerator</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">students-api/repositories/usersRepository.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Repository, database } from &apos;./repository.js&apos;
+
+/**
+ * @desc Repository with specific logic to Users table from database
+ * @extends {Repository}
+*/
+export class UsersRepository extends Repository {
+  /**
+   * @desc Instantiate base repository with the model name, basically it is a shortcut
+   * @example
+   * // Instead of
+   * const usersRepository = new Repository(&apos;User&apos;)
+   *
+   * // You can do
+   * const usersRepository2 = new UsersRepository()
+   */
+  constructor () {
+    super(&apos;User&apos;)
+  }
+
+  /**
+   * @desc Authentication method, it verifies if login fields are valid and matches with database
+   * @param {Object} body
+   * @param {string} body.password - Login password
+   * @param {string} body.email - Login email
+   * @param {string} body.username - Login username
+   * @throws {InvalidBodyError} throw when body does not have required fields
+   * @throws {InvalidArgumentError} throw when body field has invalid or non exist value
+   * @return {?User}
+   */
+  async authenticate (body) {
+    if (!(&apos;password&apos; in body)) {
+      throw new Error(&apos;Password is required&apos;)
+    }
+
+    if (&apos;email&apos; in body) {
+      return this.authenticateByEmail(body.email, body.password)
+    } else if (&apos;username&apos; in body) {
+      return this.authenticateByUsername(body.username, body.password)
+    } else {
+      throw new Error(&apos;Username or Email is required&apos;)
+    }
+  }
+
+  /**
+   * @ignore
+   */
+  async authenticateByUsername (username, password) {
+    const user = await database[this.model].scope(&apos;withPassword&apos;).findOne({ where: { username } })
+
+    if (user != null) {
+      const isAuth = user.validPassword(password, user.password)
+
+      if (!isAuth) {
+        throw new Error(&apos;Password is wrong&apos;)
+      }
+
+      return user
+    } else {
+      throw new Error(&apos;Username does not exist&apos;)
+    }
+  }
+
+  /**
+   * @ignore
+   */
+  async authenticateByEmail (email, password) {
+    const user = await database[this.model].scope(&apos;withPassword&apos;).findOne({ where: { email } })
+
+    if (user != null) {
+      const isAuth = user.validPassword(password, user.password)
+
+      if (!isAuth) {
+        throw new Error(&apos;Password is wrong&apos;)
+      }
+
+      return user
+    } else {
+      throw new Error(&apos;Email does not exist&apos;)
+    }
+  }
+
+  /**
+   * @desc Update one record from database based on filter condition
+   * @param {Object} updatedData - Updated data
+   * @param {Object} [where={}] - Filter condition
+   * @param {Object} [transaction={}] - The current transaction, argument used when needed to perform many actions on same transaction
+   * @todo Unnecessary override, just make DataAccessProjections
+   * @override
+   */
+  async updateOne (updatedData, where, transaction = {}) {
+    if (updatedData.email_verification) {
+      delete updatedData.email_verification
+    }
+
+    return database[this.model].scope(&apos;withPassword&apos;)
+      .update(updatedData, { where: { ...where } }, transaction)
+  }
+
+  /**
+   * @desc Verify user email (turn user verified)
+   * @param {number} id - User Id
+   * @param {Object} [transaction={}] - The current transaction, argument used when needed to perform many actions on same transaction
+   */
+  async verifyEmail (id, transaction = {}) {
+    database[this.model]
+      .update({ email_verification: true }, { where: { id } }, transaction)
+  }
+
+  /**
+   * @desc Check if user verified their email
+   * @param {number} id - User Id
+   * @returns {boolean}
+   */
+  async checkEmail (id) {
+    const user = await super.getOne({ id, email_verification: true })
+    return user != null
+  }
+
+  /**
+   * @desc Get user role name
+   * @param {number} id - User Id
+   * @returns {string} Role name
+   */
+  async getUserRole (id) {
+    const user = await database[this.model].findOne({ where: { id }, include: database.Role })
+    return user.role.role_name
+  }
+
+  /**
+   * @desc Create a new record on database
+   * @param {Object} data - New model data
+   * @returns {Object} The new object
+   * @todo Unnecessary override, just make DataAccessProjections
+   * @override
+   */
+  async create (data) {
+    return super.create((({ username, email, password }) =&gt; ({ username, email, password }))(data))
+  }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

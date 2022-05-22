@@ -1,3 +1,6 @@
+/**
+ * @desc Application domain rules
+ */
 const rules = {
   class: {
     max_per_classroom: 20

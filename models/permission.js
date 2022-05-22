@@ -2,6 +2,9 @@
 
 import { Model } from 'sequelize'
 
+/**
+ * @ignore
+ */
 export default (sequelize, DataTypes) => {
   class Permission extends Model {
     static associate (models) {

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">students-api/services/signatureService.js | students-api</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Just practicing"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="students-api"><meta property="twitter:description" content="Just practicing"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/hemelo/api-with-sequelize-orm"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#config">config</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-corsConfig">corsConfig</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-databaseConfig">databaseConfig</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-envRequiredKeys">envRequiredKeys</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-signaturesConfig">signaturesConfig</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-tokensConfig">tokensConfig</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#controllers">controllers</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/controllers/classController.js~ClassController.html">ClassController</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/controllers/classtypeController.js~ClasstypeController.html">ClasstypeController</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/controllers/enrollmentController.js~EnrollmentController.html">EnrollmentController</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/controllers/studentController.js~StudentsController.html">StudentsController</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/controllers/userController.js~UserController.html">UserController</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#controllers-shared">controllers/shared</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-hostUrl">hostUrl</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#domain">domain</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-rules">rules</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#infrastructure-kafka">infrastructure/kafka</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-kafka">kafka</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#infrastructure-slack">infrastructure/slack</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-slack">slack</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#middleware">middleware</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-access">access</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-logged">logged</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-refresh">refresh</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-hasPermission">hasPermission</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-hasRole">hasRole</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signed">signed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-verified">verified</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-cors">cors</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-sort">sort</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#repositories">repositories</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/repositories/classesRepository.js~ClassesRepository.html">ClassesRepository</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/repositories/classtypesRepository.js~ClasstypesRepository.html">ClasstypesRepository</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/repositories/enrollmentsRepository.js~EnrollmentsRepository.html">EnrollmentsRepository</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/repositories/permissionsRepository.js~PermissionsRepository.html">PermissionsRepository</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/repositories/repository.js~Repository.html">Repository</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/repositories/rolepermissionsRepository.js~RolepermissionsRepository.html">RolepermissionsRepository</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/repositories/rolesRepository.js~RolesRepository.html">RolesRepository</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/repositories/studentRepository.js~StudentRepository.html">StudentRepository</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/repositories/usersRepository.js~UsersRepository.html">UsersRepository</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#routes">routes</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-index">index</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#services">services</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/services/emailService.js~Email.html">Email</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/services/emailService.js~UserVerificationEmail.html">UserVerificationEmail</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-envValidatorService">envValidatorService</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signatureCheckAllowlist">signatureCheckAllowlist</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signatureDelete">signatureDelete</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signatureGenerate">signatureGenerate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signaturePayload">signaturePayload</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signaturePayloadValidateAction">signaturePayloadValidateAction</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signedUrlPath">signedUrlPath</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-accessTokenCheckBlocklist">accessTokenCheckBlocklist</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-accessTokenDelete">accessTokenDelete</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-accessTokenGenerator">accessTokenGenerator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-accessTokenVerifier">accessTokenVerifier</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-refreshTokenDelete">refreshTokenDelete</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-refreshTokenFinder">refreshTokenFinder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-refreshTokenGenerator">refreshTokenGenerator</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">students-api/services/signatureService.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import allowlist from &apos;../redis/allowlistSignedRoutes.js&apos;
+import moment from &apos;moment&apos;
+import crypto from &apos;crypto&apos;
+import signaturesConfig from &apos;../config/signatures.js&apos;
+
+/**
+ * @desc Generate a random signature and add it to redis signed urls allowlist with the payload value
+ * @param {string} payload - The value to save on redis
+ * @param {Object} action - The action to save with payload
+ * @param {string} [action.id=&apos;GENERIC&apos;] - The id (type) of action
+ * @param {number} [action.expiration.time=5] - The expiration time value
+ * @param {string} [action.expiration.time=&apos;d&apos;] - The expiration time unit
+ * @return {string} signature
+ * @example
+ * const payload = user.id
+ * const action = { id: &apos;EMAIL_VALIDATION&apos;, expiration: { time: 5, unit: &apos;d&apos; }}
+ * const signature = await signatureGenerate(payload, action)
+ */
+async function signatureGenerate (payload, action = signaturesConfig.generic) {
+  const signature = crypto.randomBytes(24).toString(&apos;hex&apos;)
+  const expirationTime = moment().add(action.expiration.time, action.expiration.unit).unix()
+  await allowlist.add(signature, `{ &quot;action&quot;: &quot;${action.id}&quot;, &quot;value&quot;: &quot;${payload}&quot; }`, expirationTime)
+  return signature
+}
+
+/**
+ * @desc Check if a signature is on the redis signed urls allowlist
+ * @param {string} sign - Signature
+ * @return {boolean}
+ */
+async function signatureCheckAllowlist (sign) {
+  return allowlist.has(sign)
+}
+
+/**
+ * @desc Get the payload from signature on the redis signed urls allowlist
+ * @param {string} sign - Sign
+ * @return {{action:string, value:string}} Returns the action ID and the value associated
+ */
+async function signaturePayload (sign) {
+  const payload = await allowlist.find(sign)
+  return JSON.parse(payload)
+}
+
+/**
+ * @desc Remove a signature from the redis signed urls allowlist
+ * @param {string} signature
+ */
+async function signatureDelete (signature) {
+  allowlist.delete(signature)
+}
+
+/**
+ * @desc Check if payload has a specific action associated with it.
+ * You can get the payload using {@link signaturePayload}
+ * @param {{action:string, value:string}} payload - The payload
+ * @param {Object} action - The action
+ * @param {string} [action.id=&apos;GENERIC&apos;] - The id (type) of action
+ * @returns
+ */
+function signaturePayloadValidateAction (payload, action = signaturesConfig.generic) {
+  return payload.action == action.id
+}
+
+/**
+ * @desc Get complete url links with signature included.
+ * You can generate signatures using {@link signatureGenerate}
+ * @param {string} route - The base url path (doesn&apos;t matters if it is absolute or not)
+ * @param {string} signature - The signature
+ * @returns {string} the link with signature included
+ */
+function signedUrlPath (route, signature) {
+  return `${route}?sign=${signature}`
+}
+
+export { signatureCheckAllowlist, signaturePayload, signatureGenerate, signedUrlPath, signatureDelete, signaturePayloadValidateAction }
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

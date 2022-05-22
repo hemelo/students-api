@@ -3,6 +3,9 @@
 import { Model } from 'sequelize'
 import bcrypt from 'bcrypt'
 
+/**
+ * @ignore
+ */
 export default (sequelize, DataTypes) => {
   class User extends Model {
     static associate (models) {

@@ -1,6 +1,15 @@
 import { UsersRepository, RolesRepository } from '../repositories'
 import { signatureCheckAllowlist } from '../services/signatureService.js'
 
+/**
+* @desc Middleware to check if route has ?sign= on query and validate the signature
+* @param {Express.Request} req - Auto injected argument by Express
+* @param {Express.Response} res - Auto injected argument by Express
+* @param {Function} next - Auto injected function arg by Express
+* @return {Object} Only return if doesn't pass the check, otherwise it will pass to the next middleware through next()
+* @example
+* const middlewares = [ authorization.signed ]
+*/
 export async function signed (req, res, next) {
   const { sign } = req.query
 
@@ -22,6 +31,15 @@ export async function signed (req, res, next) {
   next()
 }
 
+/**
+* @desc Middleware to check if user verified their email
+* @param {Request} req - Auto injected argument by Express
+* @param {Express.Response} res - Auto injected argument by Express
+* @param {Function} next - Auto injected function arg by Express
+* @return {Object} Only return if doesn't pass the check, otherwise it will pass to the next middleware through next()
+* @example
+* const middlewares = [ authorization.verified ]
+*/
 export async function verified (req, res, next) {
   const repository = new UsersRepository()
   const check = await repository.checkEmail(req.userId)
@@ -33,6 +51,13 @@ export async function verified (req, res, next) {
   }
 }
 
+/**
+* @desc Middleware to check if user has some roles
+* @param {string[]} roles - Roles to check
+* @return {Object} Only return if doesn't pass the check, otherwise it will pass to the next middleware through next()
+* @example
+* const middlewares = [authorization.hasRole(['admin', 'moderator'])]
+*/
 export const hasRole = (roles = []) => async (req, res, next) => {
   const repository = new UsersRepository()
   const userRole = await repository.getUserRole(req.userId)
@@ -47,6 +72,13 @@ export const hasRole = (roles = []) => async (req, res, next) => {
   next()
 }
 
+/**
+* @desc Middleware to check if user has permissions
+* @param {string[]} permissions - Permissions to check
+* @return {Object} Only return if doesn't pass the check, otherwise it will pass to the next middleware through next()
+* @example
+* const middlewares = [authorization.hasPermission(['show', 'delete'])]
+*/
 export const hasPermission = (permissions = []) => async (req, res, next) => {
   const repository = new RolesRepository()
 

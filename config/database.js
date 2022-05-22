@@ -1,3 +1,6 @@
+/**
+ * @desc Database config used to initialize application models
+ */
 const databaseConfig = {
   development: {
     use_env_variable: 'TEST_DATABASE',

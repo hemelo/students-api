@@ -3,7 +3,7 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.addColumn('Users', 'role_id', {
-      allowNull: false,
+      allowNull: true,
       type: Sequelize.INTEGER,
       references: { model: 'Role', key: 'id' }
     })

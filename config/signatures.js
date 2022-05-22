@@ -1,3 +1,6 @@
+/**
+ * @desc Signature configs for different types of signatures and their expiration times
+ */
 const signaturesConfig = {
   generic: {
     id: 'GENERIC',

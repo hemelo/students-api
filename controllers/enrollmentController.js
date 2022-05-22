@@ -1,7 +1,20 @@
 import { EnrollmentsRepository } from '../repositories'
+
+/**
+ * @ignore
+ */
 const repository = new EnrollmentsRepository()
 
+/**
+ * @desc Contains all logic methods to manage Enrollment models through API requests
+ */
 export default class EnrollmentController {
+  /**
+   * @desc Show all enrollments
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async index (req, res) {
     const { studentId } = req.params
     try {
@@ -12,6 +25,12 @@ export default class EnrollmentController {
     }
   }
 
+  /**
+   * @desc Show specific class
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async show (req, res) {
     const { studentId, enrollmentId } = req.params
     try {
@@ -22,6 +41,12 @@ export default class EnrollmentController {
     }
   }
 
+  /**
+   * @desc Crate a enrollment
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async create (req, res) {
     const { studentId } = req.params
     const newEnrollmentData = { ...req.body, student_id: Number(studentId) }
@@ -33,6 +58,12 @@ export default class EnrollmentController {
     }
   }
 
+  /**
+   * @desc Update a enrollment
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async update (req, res) {
     const { studentId, enrollmentId } = req.params
     const newInfo = req.body
@@ -45,6 +76,12 @@ export default class EnrollmentController {
     }
   }
 
+  /**
+   * @desc Destroy a enrollment
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async destroy (req, res) {
     const { enrollmentId } = req.params
     try {
@@ -55,6 +92,12 @@ export default class EnrollmentController {
     }
   }
 
+  /**
+   * @desc Recover a enrollment
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async recover (req, res) {
     const { studentId, enrollmentId } = req.params
     try {
@@ -65,11 +108,17 @@ export default class EnrollmentController {
     }
   }
 
+  /**
+   * @desc Get specific student enrollments
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async indexStudent (req, res) {
     const { studentId } = req.params
     try {
-      const matriculas = await repository.getStudentEnrolls(Number(studentId))
-      return res.status(200).json(matriculas)
+      const enrollments = await repository.getStudentEnrolls(Number(studentId))
+      return res.status(200).json(enrollments)
     } catch (error) {
       return res.status(500).json(error.message)
     }

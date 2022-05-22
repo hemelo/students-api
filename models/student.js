@@ -2,6 +2,9 @@
 
 import { Model } from 'sequelize'
 
+/**
+ * @ignore
+ */
 export default (sequelize, DataTypes) => {
   class Student extends Model {
     static associate (models) {

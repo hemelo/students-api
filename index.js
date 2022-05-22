@@ -7,6 +7,9 @@ import 'dotenv/config'
 /* Env Validator */
 envValidator()
 
+/**
+ * @ignore
+ */
 const app = express()
 
 /* Routes */
@@ -16,7 +19,7 @@ routes(app)
 app.use(express.urlencoded({ extended: true }))
 cors(app)
 
-/* App Initializer */
+/* Initialize server */
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}.`)
 })

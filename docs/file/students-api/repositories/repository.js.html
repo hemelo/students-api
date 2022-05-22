@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">students-api/repositories/repository.js | students-api</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Just practicing"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="students-api"><meta property="twitter:description" content="Just practicing"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/hemelo/api-with-sequelize-orm"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#config">config</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-corsConfig">corsConfig</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-databaseConfig">databaseConfig</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-envRequiredKeys">envRequiredKeys</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-signaturesConfig">signaturesConfig</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-tokensConfig">tokensConfig</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#controllers">controllers</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/controllers/classController.js~ClassController.html">ClassController</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/controllers/classtypeController.js~ClasstypeController.html">ClasstypeController</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/controllers/enrollmentController.js~EnrollmentController.html">EnrollmentController</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/controllers/studentController.js~StudentsController.html">StudentsController</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/controllers/userController.js~UserController.html">UserController</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#controllers-shared">controllers/shared</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-hostUrl">hostUrl</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#domain">domain</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-rules">rules</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#infrastructure-kafka">infrastructure/kafka</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-kafka">kafka</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#infrastructure-slack">infrastructure/slack</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-slack">slack</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#middleware">middleware</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-access">access</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-logged">logged</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-refresh">refresh</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-hasPermission">hasPermission</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-hasRole">hasRole</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signed">signed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-verified">verified</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-cors">cors</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-sort">sort</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#repositories">repositories</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/repositories/classesRepository.js~ClassesRepository.html">ClassesRepository</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/repositories/classtypesRepository.js~ClasstypesRepository.html">ClasstypesRepository</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/repositories/enrollmentsRepository.js~EnrollmentsRepository.html">EnrollmentsRepository</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/repositories/permissionsRepository.js~PermissionsRepository.html">PermissionsRepository</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/repositories/repository.js~Repository.html">Repository</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/repositories/rolepermissionsRepository.js~RolepermissionsRepository.html">RolepermissionsRepository</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/repositories/rolesRepository.js~RolesRepository.html">RolesRepository</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/repositories/studentRepository.js~StudentRepository.html">StudentRepository</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/repositories/usersRepository.js~UsersRepository.html">UsersRepository</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#routes">routes</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-index">index</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#services">services</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/services/emailService.js~Email.html">Email</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/students-api/services/emailService.js~UserVerificationEmail.html">UserVerificationEmail</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-envValidatorService">envValidatorService</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signatureCheckAllowlist">signatureCheckAllowlist</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signatureDelete">signatureDelete</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signatureGenerate">signatureGenerate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signaturePayload">signaturePayload</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signaturePayloadValidateAction">signaturePayloadValidateAction</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signedUrlPath">signedUrlPath</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-accessTokenCheckBlocklist">accessTokenCheckBlocklist</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-accessTokenDelete">accessTokenDelete</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-accessTokenGenerator">accessTokenGenerator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-accessTokenVerifier">accessTokenVerifier</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-refreshTokenDelete">refreshTokenDelete</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-refreshTokenFinder">refreshTokenFinder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-refreshTokenGenerator">refreshTokenGenerator</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">students-api/repositories/repository.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import database from &apos;../models&apos;
+
+/**
+ * @desc Repository which contains database access and common operations
+ * @abstract
+ */
+export class Repository {
+  /**
+   * @desc Initialize a new repository
+   * @param {string} model - The model name that will be accessed in database operations
+   * @example
+   * const repository = new Repository(&apos;User&apos;)
+   * const user = await repository.getOne({ id: 1 })
+   */
+  constructor (model) {
+    /**
+     * @desc Model name
+     */
+    this.model = model
+  }
+
+  /**
+   * @desc Get many records from database based on filter condition
+   * @param {Object} [where={}] - Filter condition
+   * @param {Object} [order={}] - Order by
+   * @returns {Array}
+   * @example
+   * const models = await repository.getMany({ role_id: 5 }, { createdAt: &apos;DESC&apos; })
+   */
+  async getMany (where = {}, order = []) {
+    return database[this.model].findAll({ where: { ...where }, order })
+  }
+
+  /**
+   * @desc Get one record from database based on filter condition
+   * @param {Object} [where={}] - Filter condition
+   * @returns {Object}
+   * @example
+   * const model = await repository.getOne({ role_id: 5 })
+   */
+  async getOne (where = {}) {
+    return database[this.model].findOne({ where: { ...where } })
+  }
+
+  /**
+   * @desc Create a new record on database
+   * @param {Object} data - New model data
+   * @returns {Object} The new object
+   * @example
+   * const createdModel = await repository.create({ email: &apos;example@gmail.com&apos;, password: &apos;123456678&apos; })
+   */
+  async create (data) {
+    return database[this.model].create(data)
+  }
+
+  /**
+   * @desc Update one record from database based on filter condition
+   * @param {Object} updatedData - Updated data
+   * @param {Object} [where={}] - Filter condition
+   * @param {Object} [transaction={}] - The current transaction, argument used when needed to perform many actions on same transaction
+   * @example
+   * await repository.updateOne(data, { id: 5})
+   */
+  async updateOne (updatedData, where, transaction = {}) {
+    database[this.model]
+      .update(updatedData, { where: { ...where } }, transaction)
+  }
+
+  /**
+   * @desc Delete a record from database based on filter condition
+   * @param {Object} [where={}] - Filter condition
+   * @example
+   * await repository.deleteOne({ id: 5 })
+   */
+  async deleteOne (where = {}) {
+    database[this.model].destroy({ where: { ...where } })
+  }
+
+  /**
+   * @desc Recover a record from database based on filter condition
+   * @param {Object} [where={}] - Filter condition
+   * @return {Object} The recovered record
+   * @example
+   * const recovered = await repository.recoverOne({ id: 5 })
+   */
+  async recoverOne (where = {}) {
+    return database[this.model].restore({ where: { ...where } })
+  }
+
+  /**
+   * @desc Get deleted record from database based on filter condition
+   * @param {Object} [where={}] - Filter condition
+   * @return {Object} The deleted record
+   * @example
+   * const deleted = await repository.getDeleted({ id: 5 })
+   */
+  async getDeleted (where = {}) {
+    return database[this.model]
+      .findOne({ paranoid: false, where: { ...where } })
+  }
+
+  /**
+   * @desc Get many records from database and count
+   * @param {Object} [where={}] - Filter condition
+   * @param {Object} [aggregators] - Agreggators (group_by)
+   * @returns {{count:number, rows:array }} The group objects and the count
+   * @example
+   * const { rows, models } = await repository.getManyAndCount({ status: true }, { attributes: [&apos;class_id&apos;], group: [&apos;class_id&apos;], having: Sequelize.literal(`count(class_id) &gt;= ${maxStudents}`)})
+   */
+  async getManyAndCount (where = {}, aggregators) {
+    return database[this.model]
+      .findAndCountAll({ where: { ...where }, ...aggregators })
+  }
+}
+
+export { database }
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

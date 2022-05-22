@@ -1,22 +1,5 @@
 import chalk from 'chalk'
-
-const envRequiredKeys = [
-  'NODE_ENV',
-  'APP_NAME',
-  'APP_MAIL',
-  'APP_KEY',
-  'PORT',
-  'REDIS_CONNECTION',
-  'TEST_DATABASE',
-  'DEVELOPMENT_DATABASE',
-  'PRODUCTION_DATABASE',
-  'MESSAGE_BROKERS',
-  'MAIL_PORT',
-  'MAIL_USER',
-  'MAIL_PASSWORD',
-  'MAIL_HOST',
-  'SLACK_TOKEN'
-]
+import envRequiredKeys from '../config/env.js'
 
 Array.prototype.missingKeys = array => {
   const missingKeys = []
@@ -30,6 +13,10 @@ Array.prototype.missingKeys = array => {
   return missingKeys
 }
 
+/**
+ * @desc Check if app process has the environment values to run the application without break.
+ * It breaks the application if it does not have
+ */
 export default function () {
   const missingKeys = Object.keys(process.env).missingKeys(envRequiredKeys)
 

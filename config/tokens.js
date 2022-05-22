@@ -1,3 +1,6 @@
+/**
+ * @desc JWT Token and Refresh token expiration config
+ */
 const tokensConfig = {
   refresh: {
     expiration: {

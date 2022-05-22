@@ -1,0 +1,21 @@
+{
+    "source": "./",
+    "excludes": ["(.git|node_modules|migrations|seeders|docs)"],
+    "destination": "./docs",
+    "plugins": [
+        {
+            "name": "esdoc-standard-plugin",
+            "option": {
+                "lint": {"enable": true},
+                "undocumentIdentifier": { "enable": false },
+                "unexportedIdentifier": { "enable": true }
+            }
+        }, 
+        {
+            "name": "esdoc-ecmascript-proposal-plugin", 
+            "option": {
+                "all": true
+            }
+        }
+    ]
+  }

@@ -6,11 +6,21 @@ import hostUrl from '../domain/hostUrl'
 import { signatureDelete, signatureGenerate, signaturePayload, signaturePayloadValidateAction, signedUrlPath } from '../services/signatureService.js'
 import signaturesConfig from '../config/signatures.js'
 
+/**
+ * @ignore
+ */
 const repository = new UsersRepository()
 
-const VALIDATE_EMAIL_ROUTE = rules.user.email_verification.route
-
+/**
+ * @desc Contains all logic methods to manage User models through API requests
+ */
 export default class UserController {
+  /**
+   * @desc Show specific user
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async show (req, res) {
     const { id } = req.params
     try {
@@ -21,6 +31,12 @@ export default class UserController {
     }
   }
 
+  /**
+   * @desc Show logged user profile
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async profile (req, res) {
     try {
       const user = await repository.getOne({ id: Number(req.userId) })
@@ -30,6 +46,12 @@ export default class UserController {
     }
   }
 
+  /**
+   * @desc Update logged user profile
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async updateProfile (req, res) {
     const newInfo = req.body
     try {
@@ -41,18 +63,30 @@ export default class UserController {
     }
   }
 
+  /**
+   * @desc Signin a user
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async login (req, res) {
     const userData = req.body
     try {
       const user = await repository.authenticate(userData)
-      const accessToken = await accessTokenGenerator({ id: user.id })
-      const refreshToken = await refreshTokenGenerator({ id: user.id })
+      const accessToken = await accessTokenGenerator(user.id)
+      const refreshToken = await refreshTokenGenerator(user.id)
       return res.status(200).json({ accessToken, refreshToken })
     } catch (error) {
       return res.status(500).json(error.message)
     }
   }
 
+  /**
+   * @desc Verify user email
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async verify (req, res) {
     const { id } = req.params
 
@@ -74,11 +108,22 @@ export default class UserController {
     }
   }
 
+  /**
+   * @desc Resend verification link to the user email
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async refreshVerifyLink (req, res) {
     try {
-      const user = await repository.getOne({ id: req.userId })
+      const user = await repository.getOne({ id: req.userId, email_verification: false })
+
+      if (!user) {
+        throw new Error('User has been verified before')
+      }
+
       const signature = await signatureGenerate(req.userId, signaturesConfig.email_verification)
-      const verificationUrl = signedUrlPath(`${hostUrl(req)}/${VALIDATE_EMAIL_ROUTE}/${req.userId}`, signature)
+      const verificationUrl = signedUrlPath(`${hostUrl(req)}/${rules.user.email_verification.route}/${req.userId}`, signature)
       new UserVerificationEmail(user, verificationUrl).sendMail().catch(console.error)
       return res.status(200).json({ message: `A email with the new link has send to ${user.email}` })
     } catch (error) {
@@ -86,16 +131,28 @@ export default class UserController {
     }
   }
 
+  /**
+   * @desc Refresh login (JWT Token)
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async refresh (req, res) {
     try {
-      const accessToken = await accessTokenGenerator({ id: req.userId })
-      const refreshToken = await refreshTokenGenerator({ id: req.userId })
+      const accessToken = await accessTokenGenerator(req.userId)
+      const refreshToken = await refreshTokenGenerator(req.userId)
       return res.status(200).json({ accessToken, refreshToken })
     } catch (error) {
       return res.status(500).json(error.message)
     }
   }
 
+  /**
+   * @desc Logout current user
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async logout (req, res) {
     try {
       await accessTokenDelete(req.headers['x-access-token'])
@@ -105,6 +162,12 @@ export default class UserController {
     }
   }
 
+  /**
+   * @desc Crate a user (register)
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async create (req, res) {
     const newUserData = req.body
     try {
@@ -122,6 +185,12 @@ export default class UserController {
     }
   }
 
+  /**
+   * @desc Update a user
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async update (req, res) {
     const { id } = req.params
     const newInfo = req.body
@@ -134,6 +203,12 @@ export default class UserController {
     }
   }
 
+  /**
+   * @desc Destroy a user
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async destroy (req, res) {
     const { id } = req.params
     try {
@@ -144,6 +219,12 @@ export default class UserController {
     }
   }
 
+  /**
+   * @desc Recover a user
+   * @param {Express.Request} req - Auto injected argument by Express
+   * @param {Express.Response} res - Auto injected argument by Express
+   * @returns {Express.Response} JSON
+   */
   static async recover (req, res) {
     const { id } = req.params
     try {
